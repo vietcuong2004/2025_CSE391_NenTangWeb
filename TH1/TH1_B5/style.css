@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header a {
+    color: #fff;
+    margin-right: 15px;
+    text-decoration: none;
+  }
+  
+  .header input {
+    padding: 5px;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .action button {
+    padding: 5px 10px;
+    margin-right: 5px;
+  }
+  
+  .edit {
+    background-color: #ffcc00;
+    border: none;
+    color: #fff;
+  }
+  
+  .delete {
+    background-color: #ff0000;
+    border: none;
+    color: #fff;
+  }
+  
+  .add-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid #007bff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    width: 400px;
+  }
+  
+  .modal h3 {
+    margin: -20px -20px 20px -20px;
+    background-color: #007bff; /* Màu xanh dương */
+    color: #fff;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .modal-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .modal input, .modal select {
+    flex: 1;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  
+  .modal .sex-selection {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .modal .sex-selection label {
+    margin: 0;
+  }
+  
+  .modal-buttons-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .modal button {
+    padding: 10px 20px;
+  }
+  
+  .save {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+  }
+  
+  .cancel {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+  }

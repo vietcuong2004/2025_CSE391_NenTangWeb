@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <div>
+      <span>HR Management</span>
+      <a href="#">Home</a>
+      <a href="#">Contact</a>
+    </div>
+    <div>
+      <input type="text" id="search-input" placeholder="Search...">
+      <button id="search-btn">Search</button>
+    </div>
+  </div>
+  <div class="container">
+    <h2>Employee <button class="add-btn">+ Add</button></h2>
+    <table id="employee-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Position</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="employee-table-body">
+        <tr data-id="1">
+          <td>1</td>
+          <td>Fatima Beatriz</td>
+          <td>Fatima Beatriz@gmail.com</td>
+          <td>0985674321</td>
+          <td>Staff</td>
+          <td class="action">
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+          </td>
+        </tr>
+        <tr data-id="2">
+          <td>2</td>
+          <td>Gabriel Hanna</td>
+          <td>Gabriel Hanna@gmail.com</td>
+          <td>0356764231</td>
+          <td>Staff</td>
+          <td class="action">
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+          </td>
+        </tr>
+        <tr data-id="3">
+          <td>3</td>
+          <td>Charles Diya</td>
+          <td>Charles Diya@gmail.com</td>
+          <td>0347658833</td>
+          <td>Staff</td>
+          <td class="action">
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+          </td>
+        </tr>
+        <tr data-id="4">
+          <td>4</td>
+          <td>Frank Lamdo</td>
+          <td>Frank Lamdo@gmail.com</td>
+          <td>0975444768</td>
+          <td>Manager</td>
+          <td class="action">
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+          </td>
+        </tr>
+        <tr data-id="5">
+          <td>5</td>
+          <td>Louis Tom</td>
+          <td>Louis Tom@gmail.com</td>
+          <td>078968223</td>
+          <td>Staff</td>
+          <td class="action">
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="modal" class="modal">
+      <h3 id="modal-title">New Employee <span class="close">×</span></h3>
+      <div class="modal-row">
+        <input type="text" id="name" placeholder="Name">
+        <input type="email" id="email" placeholder="Email">
+      </div>
+      <div class="modal-row">
+        <input type="text" id="phone" placeholder="Phone">
+        <select id="position">
+          <option value="" disabled selected>-- Select Position --</option>
+          <option value="Staff">Staff</option>
+          <option value="Manager">Manager</option>
+          <option value="CEO">CEO</option>
+        </select>
+      </div>
+      <div class="modal-row">
+        <div class="sex-selection">
+          <label><input type="radio" name="sex" value="Male"> Male</label>
+          <label><input type="radio" name="sex" value="Female"> Female</label>
+        </div>
+      </div>
+      <div class="modal-buttons-right">
+        <button id="save-btn" class="save">Save</button>
+        <button id="cancel-btn" class="cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    let employees = [
+      { id: 1, name: "Fatima Beatriz", email: "Fatima Beatriz@gmail.com", phone: "0985674321", position: "Staff", sex: "Female" },
+      { id: 2, name: "Gabriel Hanna", email: "Gabriel Hanna@gmail.com", phone: "0356764231", position: "Staff", sex: "Male" },
+      { id: 3, name: "Charles Diya", email: "Charles Diya@gmail.com", phone: "0347658833", position: "Staff", sex: "Male" },
+      { id: 4, name: "Frank Lamdo", email: "Frank Lamdo@gmail.com", phone: "0975444768", position: "Manager", sex: "Male" },
+      { id: 5, name: "Louis Tom", email: "Louis Tom@gmail.com", phone: "078968223", position: "Staff", sex: "Male" }
+    ];
+    let editId = null;
+
+    function renderTable(data = employees) {
+      const tbody = document.getElementById('employee-table-body');
+      tbody.innerHTML = '';
+      data.forEach(employee => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-id', employee.id);
+        row.innerHTML = `
+          <td>${employee.id}</td>
+          <td>${employee.name}</td>
+          <td>${employee.email}</td>
+          <td>${employee.phone}</td>
+          <td>${employee.position}</td>
+          <td class="action">
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+      attachEventListeners();
+    }
+
+    function attachEventListeners() {
+      document.querySelectorAll('.edit').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = parseInt(this.parentElement.parentElement.getAttribute('data-id'));
+          const employee = employees.find(emp => emp.id === id);
+          editId = id;
+          document.getElementById('modal-title').textContent = 'Edit Employee';
+          document.getElementById('name').value = employee.name;
+          document.getElementById('email').value = employee.email;
+          document.getElementById('phone').value = employee.phone;
+          document.getElementById('position').value = employee.position;
+          document.querySelector(`input[name="sex"][value="${employee.sex}"]`).checked = true;
+          document.getElementById('modal').style.display = 'block';
+        });
+      });
+
+      document.querySelectorAll('.delete').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = parseInt(this.parentElement.parentElement.getAttribute('data-id'));
+          employees = employees.filter(emp => emp.id !== id);
+          renderTable();
+        });
+      });
+
+      document.querySelector('.close').addEventListener('click', function() {
+        document.getElementById('modal').style.display = 'none';
+      });
+    }
+
+    document.querySelector('.add-btn').addEventListener('click', function() {
+      editId = null;
+      document.getElementById('modal-title').textContent = 'New Employee';
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('position').value = '';
+      document.querySelectorAll('input[name="sex"]').forEach(radio => radio.checked = false);
+      document.getElementById('modal').style.display = 'block';
+    });
+
+    document.getElementById('cancel-btn').addEventListener('click', function() {
+      document.getElementById('modal').style.display = 'none';
+    });
+
+    document.getElementById('save-btn').addEventListener('click', function() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const position = document.getElementById('position').value;
+      const sex = document.querySelector('input[name="sex"]:checked')?.value || '';
+
+      if (name && email && phone && position && sex) {
+        if (editId) {
+          const employee = employees.find(emp => emp.id === editId);
+          employee.name = name;
+          employee.email = email;
+          employee.phone = phone;
+          employee.position = position;
+          employee.sex = sex;
+        } else {
+          const newId = employees.length ? Math.max(...employees.map(emp => emp.id)) + 1 : 1;
+          employees.push({ id: newId, name, email, phone, position, sex });
+        }
+        renderTable();
+        document.getElementById('modal').style.display = 'none';
+      } else {
+        alert('Vui lòng điền đầy đủ thông tin.');
+      }
+    });
+
+    document.getElementById('search-btn').addEventListener('click', function() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const filteredEmployees = employees.filter(emp => emp.name.toLowerCase().includes(searchTerm));
+      renderTable(filteredEmployees);
+    });
+
+    renderTable();
+  </script>
+</body>
+</html>

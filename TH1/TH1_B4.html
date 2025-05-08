@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Info Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .captcha {
+            font-family: monospace;
+            font-size: 20px;
+            background: #f0f0f0;
+            padding: 10px;
+            display: inline-block;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        .button-container button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-left: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .button-container button:hover {
+            background-color: #555;
+        }
+
+        .required-text {
+            font-size: 12px;
+            color: #333;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2>Basic Info</h2>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label>Employee ID</label>
+                <p>9</p>
+
+                <label>Last Name</label>
+                <p>Dodsworth</p>
+
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" value="Anne">
+
+                <label>Gender</label>
+                <div class="radio-group">
+                    <input type="radio" id="male" name="gender">
+                    <label for="male">Male</label>
+
+                    <input type="radio" id="female" name="gender">
+                    <label for="female">Female</label>
+
+                    <input type="radio" id="xxx" name="gender">
+                    <label for="xxx">XXX</label>
+
+                    <input type="radio" id="zzz" name="gender" checked>
+                    <label for="zzz">ZZZ</label>
+                </div>
+
+                <label for="title">Title</label>
+                <input type="text" id="title" value="Sales Representative">
+
+                <label for="suffix">Suffix</label>
+                <input type="text" id="suffix" value="Ms.">
+
+                <label for="birth-date">Birth Date</label>
+                <input type="datetime-local" id="birth-date" value="1969-07-02T00:00:00">
+
+                <label for="hire-date">Hire Date</label>
+                <input type="datetime-local" id="hire-date" value="1994-11-15T00:00:00">
+
+                <label for="ssn">SSN#</label>
+                <input type="text" id="ssn">
+
+                <label for="reports-to">Reports To</label>
+                <select id="reports-to">
+                    <option value="Buchanan">Buchanan</option>
+                </select>
+            </div>
+
+            <h2>Contact Info</h2>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="name@example.com" readonly>
+
+                <label for="address">Address</label>
+                <input type="text" id="address" value="7 Houndstooth Rd.">
+
+                <label for="city">City</label>
+                <input type="text" id="city" value="London">
+
+                <label for="region">Region</label>
+                <input type="text" id="region">
+
+                <label for="postal">Postal Code</label>
+                <input type="text" id="postal" value="WG2 7LT">
+
+                <label for="country">Country</label>
+                <select id="country">
+                    <option value="russia" selected>Russian Federation</option>
+                </select>
+
+                <label for="phone">US Home Phone</label>
+                <input type="text" id="phone" value="(234)234-2342">
+
+                <label for="photo">Photo</label>
+                <input type="file" id="photo" accept="image/*">
+            </div>
+
+            <h2>Optional Info</h2>
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea id="notes">Anne has a BA degree in English from St. Lawrence College. 
+She is fluent in French and German.ZZZ</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Preferred Shift</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="regular">
+                    <label for="regular">Regular</label>
+
+                    <input type="checkbox" id="gravy-yard" checked>
+                    <label for="gravy-yard">Gravy Yard</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="active">Active?</label>
+                <input type="checkbox" id="active" checked>
+            </div>
+
+            <div class="form-group">
+                <label>Are you human?</label>
+                <div class="captcha">TIDAWO</div>
+                <button type="button">Click to change</button>
+                <input type="text" placeholder="Enter CAPTCHA here">
+            </div>
+
+            <div class="button-container">
+                <button type="submit">Submit</button>
+                <button type="button">Cancel</button>
+            </div>
+            <p class="required-text">* required</p>
+        </form>
+    </div>
+
+</body>
+
+</html>
